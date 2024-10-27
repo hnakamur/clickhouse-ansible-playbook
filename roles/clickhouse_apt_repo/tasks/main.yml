@@ -1,0 +1,5 @@
+---
+- import_tasks: config.yml
+  tags:
+  - clickhouse_apt_repo
+  - clickhouse_apt_repo_config

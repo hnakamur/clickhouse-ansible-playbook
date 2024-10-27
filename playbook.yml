@@ -1,0 +1,8 @@
+- name: Set up a ClickHouse cluster
+  hosts: all
+  roles:
+  - role: clickhouse_apt_repo
+  - role: clickhouse
+    when: inventory_hostname in groups["databases"]
+  - role: clickhouse_keeper
+    when: inventory_hostname in groups["keepers"]

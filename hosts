@@ -1,0 +1,8 @@
+[databases]
+clickhouse01
+clickhouse02
+
+[keepers]
+keeper01
+keeper02
+keeper03

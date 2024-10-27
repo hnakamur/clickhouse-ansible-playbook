@@ -1,0 +1,16 @@
+<clickhouse>
+    <remote_servers replace="true">
+        <cluster_1S_2R>
+            <!-- <secret>mysecretphrase</secret> -->
+            <shard>
+                <internal_replication>true</internal_replication>
+{% for server in clickhouse_attrs %}
+                <replica>
+                    <host>{{ server.host }}</host>
+                    <port>9000</port>
+                </replica>
+{% endfor %}
+            </shard>
+        </cluster_1S_2R>
+    </remote_servers>
+</clickhouse>

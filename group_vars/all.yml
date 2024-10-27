@@ -1,0 +1,10 @@
+---
+ansible_ssh_common_args: '-F ssh/config'
+ansible_python_interpreter: "{{ python_fullpath | default('/usr/bin/python3') }}"
+clickhouse_attrs:
+- {host: clickhouse01, replica_id: '01',  node_id: '1'}
+- {host: clickhouse02, replica_id: '02',  node_id: '2'}
+clickhouse_keeper_attrs:
+- {host: keeper01, server_id: '1'}
+- {host: keeper02, server_id: '2'}
+- {host: keeper03, server_id: '3'}

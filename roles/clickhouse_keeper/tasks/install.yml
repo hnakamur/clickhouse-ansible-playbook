@@ -1,0 +1,5 @@
+---
+- name: Install clickhouse-keeper
+  apt:
+    name: clickhouse-keeper
+    update_cache: yes

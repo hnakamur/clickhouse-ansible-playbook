@@ -1,0 +1,19 @@
+---
+- name: Install packages to set up ClickHouse apt repository
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+    update_cache: yes
+
+- name: Download ClickHouse apt repository key
+  shell: curl -fsSL 'https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key' | gpg --dearmor -o /etc/apt/keyrings/clickhouse-keyring.gpg
+  args:
+    creates: /etc/apt/keyrings/clickhouse-keyring.gpg
+
+- name: Create ClickHouse apt respoistory source file
+  copy:
+    src: clickhouse.sources
+    dest: /etc/apt/sources.list.d/clickhouse.sources

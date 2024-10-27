@@ -1,0 +1,7 @@
+---
+- name: Install clickhouse-server and clickhouse-client
+  apt:
+    pkg:
+      - clickhouse-server
+      - clickhouse-client
+    update_cache: yes

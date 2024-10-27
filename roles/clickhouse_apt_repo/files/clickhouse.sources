@@ -1,0 +1,5 @@
+Types: deb
+URIs: https://packages.clickhouse.com/deb
+Suites: stable
+Components: main
+Signed-By: /etc/apt/keyrings/clickhouse-keyring.gpg

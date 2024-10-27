@@ -1,0 +1,10 @@
+---
+- import_tasks: install.yml
+  tags:
+  - clickhouse_keeper
+  - clickhouse_keeper_install
+
+- import_tasks: config.yml
+  tags:
+  - clickhouse_keeper
+  - clickhouse_keeper_config

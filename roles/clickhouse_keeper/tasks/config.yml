@@ -1,0 +1,25 @@
+---
+- name: Create /var/lib/clickhouse-keeper directory
+  file:
+    name: /var/lib/clickhouse-keeper
+    state: directory
+    owner: clickhouse
+    group: clickhouse
+    mode: 0700
+
+- name: Set server_id for clickhouse-keeper configs
+  set_fact:
+    clickhouse_keeper_server_id: '{{ (clickhouse_keeper_attrs|selectattr("host", "==", inventory_hostname))[0].server_id }}'
+
+- name: Create /etc/clickhouse-keeper/keeper_config.xml
+  template:
+    src: keeper_config.xml.j2
+    dest: /etc/clickhouse-keeper/keeper_config.xml
+  register: clickhouse_keeper_config_files
+
+- name: Restart clickhouse-keeper service when config files are changed
+  systemd:
+    name: clickhouse-keeper
+    # NOTE: Use restarted here since clckhouse-keeper service does not support reload
+    state: restarted
+  when: clickhouse_keeper_config_files.changed

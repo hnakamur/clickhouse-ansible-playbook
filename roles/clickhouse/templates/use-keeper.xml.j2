@@ -1,0 +1,10 @@
+<clickhouse>
+    <zookeeper>
+{% for server in clickhouse_keeper_attrs %}
+        <node>
+            <host>{{ server.host }}</host>
+            <port>9181</port>
+        </node>
+{% endfor %}
+    </zookeeper>
+</clickhouse>

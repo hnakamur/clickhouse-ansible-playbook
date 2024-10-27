@@ -1,0 +1,31 @@
+---
+- name: Create /etc/clickhouse-server/config.d/ directory
+  file:
+    name: /etc/clickhouse-server/config.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Set replica_id and node_id for ClickHouse configs
+  set_fact:
+    clickhouse_replica_id: '{{ (clickhouse_attrs|selectattr("host", "==", inventory_hostname))[0].replica_id }}'
+    clickhouse_node_id: '{{ (clickhouse_attrs|selectattr("host", "==", inventory_hostname))[0].node_id }}'
+
+- name: Create files in /etc/clickhouse-server/config.d/ directory
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/clickhouse-server/config.d/{{ item }}"
+  with_items:
+  - network-and-logging.xml
+  - macros.xml
+  - remote-servers.xml
+  - use-keeper.xml
+  register: clickhouse_config_files
+
+- name: Restart clickhouse-server service when config files are changed
+  systemd:
+    name: clickhouse-server
+    # NOTE: Use restarted here since clckhouse-server service does not support reload
+    state: restarted
+  when: clickhouse_config_files.changed
