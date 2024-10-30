@@ -20,6 +20,7 @@
   - network-and-logging.xml
   - macros.xml
   - remote-servers.xml
+  - timezone.xml
   - use-keeper.xml
   register: clickhouse_config_files
 
