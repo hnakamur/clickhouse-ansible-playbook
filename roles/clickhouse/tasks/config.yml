@@ -12,11 +12,20 @@
     clickhouse_replica_id: '{{ (clickhouse_attrs|selectattr("host", "==", inventory_hostname))[0].replica_id }}'
     clickhouse_node_id: '{{ (clickhouse_attrs|selectattr("host", "==", inventory_hostname))[0].node_id }}'
 
+- name: Create /backups directory
+  file:
+    name: /backups
+    state: directory
+    mode: 0755
+    owner: clickhouse
+    group: clickhouse
+
 - name: Create files in /etc/clickhouse-server/config.d/ directory
   template:
     src: "{{ item }}.j2"
     dest: "/etc/clickhouse-server/config.d/{{ item }}"
   with_items:
+  - backup_disk.xml
   - network-and-logging.xml
   - macros.xml
   - remote-servers.xml
