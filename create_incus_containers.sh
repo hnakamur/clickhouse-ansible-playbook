@@ -24,7 +24,15 @@ create_container() {
     return
   fi
 
-  incus launch images:ubuntu/24.04 "$container_name" --network noipv6
+  incus launch images:ubuntu/24.04/cloud "$container_name" -c user.network-config="#cloud-config
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: true
+      dhcp-identifier: mac
+      link-local: [ ipv4 ]"
+
   incus exec "$container_name" -- apt update
   incus exec "$container_name" -- apt -y install openssh-server
   incus exec "$container_name" -- mkdir -p -m 700 /root/.ssh
@@ -54,10 +62,6 @@ EOF
 if [ ! -f "$public_key" ]; then
   mkdir -p "$project_ssh_dir"
   ssh-keygen -t ed25519 -C "key for $project_name incus project" -N '' -f "$private_key"
-fi
-
-if ! incus network info noipv6 2>/dev/null >/dev/null; then
-  incus network create noipv6 ipv6.address=none
 fi
 
 if ! incus project info "$project_name" 2>/dev/null >/dev/null; then
