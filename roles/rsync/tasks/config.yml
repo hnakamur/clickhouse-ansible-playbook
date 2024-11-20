@@ -1,0 +1,16 @@
+---
+- name: Install ssh private key
+  copy:
+    src: ssh/id_ed25519.clickhouse
+    dest: /root/.ssh/id_ed25519
+    owner: root
+    group: root
+    mode: '0400'
+
+- name: Install ssh known_hosts
+  copy:
+    src: ssh/known_hosts
+    dest: /root/.ssh/known_hosts
+    owner: root
+    group: root
+    mode: '0600'

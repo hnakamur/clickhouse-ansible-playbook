@@ -42,8 +42,6 @@ network:
   
   ipv4_addr=$(incus list -c 4 -f csv "^${container_name}\$" | cut -d ' ' -f 1)
   
-  ssh-keyscan "$ipv4_addr" >> "$ssh_known_hosts" 2> /dev/null
-  
   if [ -f "$ssh_config" ]; then
     sed -i "/^Host $container_name$/,/^$/d" "$ssh_config"
   fi
@@ -58,7 +56,16 @@ Host $container_name
 
 EOF
 }
-  
+
+create_ssh_known_hosts() {
+  for container_name in $container_names; do
+    ipv4_addr=$(incus list -c 4 -f csv "^${container_name}\$" | cut -d ' ' -f 1)
+    ssh-keyscan "$ipv4_addr" 2> /dev/null
+    escaped_addr=$(echo "$ipv4_addr" | sed 's/\./\\./g')
+    ssh-keyscan "$ipv4_addr" 2> /dev/null | sed "s/^$escaped_addr /$container_name /"
+  done > "$ssh_known_hosts"
+}
+
 if [ ! -f "$public_key" ]; then
   mkdir -p "$project_ssh_dir"
   ssh-keygen -t ed25519 -C "key for $project_name incus project" -N '' -f "$private_key"
@@ -71,6 +78,8 @@ fi
 
 incus project switch "$project_name"
 
-for container in $container_names; do
-  create_container "$container"
+for container_name in $container_names; do
+  create_container "$container_name"
 done
+
+create_ssh_known_hosts

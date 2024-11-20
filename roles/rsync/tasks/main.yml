@@ -1,0 +1,10 @@
+---
+- import_tasks: install.yml
+  tags:
+  - rsync
+  - rsync_install
+
+- import_tasks: config.yml
+  tags:
+  - rsync
+  - rsync_config

@@ -1,6 +1,7 @@
 - name: Set up a ClickHouse cluster
   hosts: all
   roles:
+  - role: rsync
   - role: clickhouse_apt_repo
   - role: clickhouse
     when: inventory_hostname in groups["databases"]
