@@ -7,10 +7,11 @@
     group: root
     mode: 0755
 
-- name: Set replica_id and node_id for ClickHouse configs
+- name: Set shard_id, replica_id, and cluster_name for ClickHouse configs
   set_fact:
-    clickhouse_replica_id: '{{ (clickhouse_attrs|selectattr("host", "==", inventory_hostname))[0].replica_id }}'
-    clickhouse_node_id: '{{ (clickhouse_attrs|selectattr("host", "==", inventory_hostname))[0].node_id }}'
+    clickhouse_shard_id: '{{ (clickhouse_servers|selectattr("host", "==", inventory_hostname)|first).shard_id }}'
+    clickhouse_replica_id: '{{ (clickhouse_servers|selectattr("host", "==", inventory_hostname)|first).replica_id }}'
+    clickhoust_cluster_name: '{{ (clickhouse_servers|selectattr("host", "==", inventory_hostname)|first).cluster_name }}'
 
 - name: Create /backups directory
   file:

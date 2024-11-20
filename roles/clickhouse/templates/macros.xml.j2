@@ -1,7 +1,7 @@
 <clickhouse>
     <macros>
-        <shard>01</shard>
+        <shard>{{ clickhouse_shard_id }}</shard>
         <replica>{{ clickhouse_replica_id }}</replica>
-        <cluster>cluster_1S_2R</cluster>
+        <cluster>{{ clickhouse_cluster_name }}</cluster>
     </macros>
 </clickhouse>

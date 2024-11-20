@@ -1,16 +1,20 @@
 <clickhouse>
     <remote_servers replace="true">
-        <cluster_1S_2R>
+{% for cluster_name in clickhouse_clusters %}
+        <{{ cluster_name }}>
             <!-- <secret>mysecretphrase</secret> -->
+{%   for shard in clickhouse_shards|selectattr("cluster_name", "==", cluster_name)|list %}
             <shard>
                 <internal_replication>true</internal_replication>
-{% for server in clickhouse_attrs %}
+{%     for server in clickhouse_servers|selectattr("cluster_name", "==", cluster_name)|list|selectattr("shard_id", "==", shard.shard_id)|list %}
                 <replica>
                     <host>{{ server.host }}</host>
                     <port>9000</port>
                 </replica>
-{% endfor %}
+{%     endfor %}
             </shard>
-        </cluster_1S_2R>
+{%   endfor %}
+        </{{ cluster_name }}>
+{% endfor %}
     </remote_servers>
 </clickhouse>

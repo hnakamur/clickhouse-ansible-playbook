@@ -7,7 +7,7 @@ if [ $# -ne 1 ]; then
 fi
 
 project_name="$1"
-container_names="clickhouse01 clickhouse02 keeper01 keeper02 keeper03"
+container_names="ch-c01-s01-r01 ch-c01-s01-r02 ch-c01-s02-r01 ch-c01-s02-r02 keeper01 keeper02 keeper03"
 
 project_ssh_dir=ssh
 root_password="proxy-santos-hatch-plotting"
