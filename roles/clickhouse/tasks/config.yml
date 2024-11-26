@@ -3,9 +3,9 @@
   file:
     name: /etc/clickhouse-server/config.d
     state: directory
-    owner: root
-    group: root
-    mode: 0755
+    owner: clickhouse
+    group: clickhouse
+    mode: "0755"
 
 - name: Set shard_id, replica_id, and cluster_name for ClickHouse configs
   set_fact:
@@ -17,14 +17,17 @@
   file:
     name: /backups
     state: directory
-    mode: 0755
     owner: clickhouse
     group: clickhouse
+    mode: "0755"
 
 - name: Create files in /etc/clickhouse-server/config.d/ directory
   template:
     src: "{{ item }}.j2"
     dest: "/etc/clickhouse-server/config.d/{{ item }}"
+    owner: clickhouse
+    group: clickhouse
+    mode: "0644"
   with_items:
   - backup_disk.xml
   - network-and-logging.xml

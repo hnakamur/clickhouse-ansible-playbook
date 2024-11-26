@@ -1,10 +1,14 @@
 <clickhouse>
     <logger>
-        <level>debug</level>
-        <log>/var/log/clickhouse-server/clickhouse-server.log</log>
-        <errorlog>/var/log/clickhouse-server/clickhouse-server.err.log</errorlog>
+        <!--
+          See https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings#logger
+          for logger settings.
+        -->
+        <level>information</level>
+        <log>/var/log/clickhouse-server/clickhouse-server-%Y%m%dT%H%M%S.log</log>
+        <errorlog>/var/log/clickhouse-server/clickhouse-server-%Y%m%dT%H%M%S.err.log</errorlog>
         <size>1000M</size>
-        <count>3</count>
+        <count>10</count>
     </logger>
     <display_name>{{ inventory_hostname }}</display_name>
     <listen_host>0.0.0.0</listen_host>
