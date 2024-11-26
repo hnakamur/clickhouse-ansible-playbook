@@ -1,10 +1,14 @@
 <clickhouse>
     <logger>
-        <level>trace</level>
-        <log>/var/log/clickhouse-keeper/clickhouse-keeper.log</log>
-        <errorlog>/var/log/clickhouse-keeper/clickhouse-keeper.err.log</errorlog>
+        <!--
+          See https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings#logger
+          for logger settings.
+        -->
+        <level>information</level>
+        <log>/var/log/clickhouse-keeper/clickhouse-keeper-%Y%m%dT%H%M%S.log</log>
+        <errorlog>/var/log/clickhouse-keeper/clickhouse-keeper-%Y%m%dT%H%M%S.err.log</errorlog>
         <size>1000M</size>
-        <count>3</count>
+        <count>10</count>
     </logger>
     <listen_host>0.0.0.0</listen_host>
     <keeper_server>
@@ -15,7 +19,7 @@
         <coordination_settings>
             <operation_timeout_ms>10000</operation_timeout_ms>
             <session_timeout_ms>30000</session_timeout_ms>
-            <raft_logs_level>trace</raft_logs_level>
+            <raft_logs_level>information</raft_logs_level>
         </coordination_settings>
         <raft_configuration>
 {% for server in clickhouse_keeper_attrs %}
