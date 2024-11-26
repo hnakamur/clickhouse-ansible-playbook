@@ -24,7 +24,9 @@ create_container() {
     return
   fi
 
-  incus launch images:ubuntu/24.04/cloud "$container_name" -c user.network-config="#cloud-config
+  incus launch images:ubuntu/24.04/cloud "$container_name" -c user.user-data="#cloud-config
+timezone: Asia/Tokyo
+" -c user.network-config="#cloud-config
 network:
   version: 2
   ethernets:
