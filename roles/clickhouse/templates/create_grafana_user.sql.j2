@@ -1,0 +1,2 @@
+CREATE USER IF NOT EXISTS {{ grafana_clickhouse_user }} IDENTIFIED BY '{{ grafana_clickhouse_password }}';
+GRANT SELECT ON default.graphite_* TO {{ grafana_clickhouse_user }};

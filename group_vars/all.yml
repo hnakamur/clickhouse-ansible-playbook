@@ -20,3 +20,6 @@ clickhouse_keeper_attrs:
 - {host: keeper01, server_id: '1'}
 - {host: keeper02, server_id: '2'}
 - {host: keeper03, server_id: '3'}
+
+grafana_clickhouse_user: "grafana"
+grafana_clickhouse_password: "grafana_password"

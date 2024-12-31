@@ -1,0 +1,14 @@
+---
+# https://grafana.com/tutorials/provision-dashboards-and-data-sources/
+- name: Create datasource for carbonapi in Grafana
+  template:
+    src: datasources.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/default.yaml
+    owner: root
+    group: grafana
+    mode: "0640"
+
+- name: Start grafana-server service
+  systemd:
+    name: grafana-server
+    state: started

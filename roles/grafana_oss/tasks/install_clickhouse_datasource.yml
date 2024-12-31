@@ -1,0 +1,5 @@
+---
+- name: Download grafana_clickhouse_datasource plugin
+  command: grafana-cli plugins install grafana-clickhouse-datasource
+  args:
+    creates: /var/lib/grafana/plugins/grafana-clickhouse-datasource

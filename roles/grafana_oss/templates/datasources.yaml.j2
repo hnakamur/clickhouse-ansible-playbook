@@ -1,0 +1,15 @@
+apiVersion: 1
+
+datasources:
+  # https://grafana.com/grafana/plugins/grafana-clickhouse-datasource/?tab=overview
+{% for server in clickhouse_servers %}  
+  - name: ClickHouse {{ server.host }}
+    type: grafana-clickhouse-datasource
+    jsonData:
+      port: 9000
+      host: {{ server.host }}
+      username: '{{ grafana_clickhouse_user }}'
+      tlsSkipVerify: false
+    secureJsonData:
+      password: '{{ grafana_clickhouse_password }}'
+{% endfor %}

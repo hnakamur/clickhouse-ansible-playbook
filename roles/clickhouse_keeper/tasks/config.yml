@@ -23,3 +23,8 @@
     # NOTE: Use restarted here since clckhouse-keeper service does not support reload
     state: restarted
   when: clickhouse_keeper_config_files.changed
+
+- name: Eanble clickhouse-keeper auto start
+  systemd:
+    name: clickhouse-keeper
+    enabled: true

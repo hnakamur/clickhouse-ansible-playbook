@@ -7,3 +7,5 @@
     when: inventory_hostname in groups["databases"]
   - role: clickhouse_keeper
     when: inventory_hostname in groups["keepers"]
+  - role: grafana_oss
+    when: inventory_hostname in groups["grafanas"]
