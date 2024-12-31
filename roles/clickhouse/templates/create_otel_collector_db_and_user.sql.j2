@@ -1,0 +1,4 @@
+CREATE DATABASE IF NOT EXISTS {{ otel_database }};
+
+CREATE USER IF NOT EXISTS {{ otel_collector_clickhouse_user }} IDENTIFIED BY '{{ otel_collector_clickhouse_password }}';
+GRANT CREATE, INSERT, SELECT, dictGet ON {{ otel_database }}.* TO {{ otel_collector_clickhouse_user }};

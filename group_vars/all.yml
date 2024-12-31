@@ -23,3 +23,7 @@ clickhouse_keeper_attrs:
 
 grafana_clickhouse_user: "grafana"
 grafana_clickhouse_password: "grafana_password"
+
+otel_database: "otel"
+otel_collector_clickhouse_user: "otel_collector"
+otel_collector_clickhouse_password: "otel_collector_password"
