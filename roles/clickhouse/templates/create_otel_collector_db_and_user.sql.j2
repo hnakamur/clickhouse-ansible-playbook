@@ -1,4 +1,5 @@
 CREATE DATABASE IF NOT EXISTS {{ otel_database }} ON CLUSTER `{cluster}`;
 
 CREATE USER IF NOT EXISTS {{ otel_collector_clickhouse_user }} ON CLUSTER `{cluster}` IDENTIFIED BY '{{ otel_collector_clickhouse_password }}';
+GRANT ON CLUSTER `{cluster}` CLUSTER ON *.* TO {{ otel_collector_clickhouse_user }};
 GRANT ON CLUSTER `{cluster}` CREATE, INSERT, SELECT, dictGet ON {{ otel_database }}.* TO {{ otel_collector_clickhouse_user }};

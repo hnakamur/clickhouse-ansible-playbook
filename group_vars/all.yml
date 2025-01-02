@@ -27,3 +27,5 @@ grafana_clickhouse_password: "grafana_password"
 otel_database: "otel"
 otel_collector_clickhouse_user: "otel_collector"
 otel_collector_clickhouse_password: "otel_collector_password"
+
+otelcol_contrib_version: "0.116.1"

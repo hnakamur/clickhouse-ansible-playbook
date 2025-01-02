@@ -7,5 +7,7 @@
     when: inventory_hostname in groups["keepers"]
   - role: clickhouse
     when: inventory_hostname in groups["databases"]
+  - role: otelcol_contrib
+    when: inventory_hostname in groups["databases"]
   - role: grafana_oss
     when: inventory_hostname in groups["grafanas"]

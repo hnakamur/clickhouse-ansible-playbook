@@ -1,0 +1,10 @@
+---
+- import_tasks: install.yml
+  tags:
+  - otelcol_contrib
+  - otelcol_contrib_install
+
+- import_tasks: config.yml
+  tags:
+  - otelcol_contrib
+  - otelcol_contrib_config

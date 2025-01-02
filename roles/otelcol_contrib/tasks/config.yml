@@ -1,0 +1,20 @@
+- name: Create otelcol-contrib config.yaml
+  template:
+    src: config.yaml.j2
+    dest: /etc/otelcol-contrib/config.yaml
+    owner: root
+    group: root
+    mode: "0644"
+  register: otelcol_contrib_config_file_result
+
+- name: Restart otelcol-contrib service when config file was changed
+  systemd:
+    name: otelcol-contrib
+    state: restarted
+  when: otelcol_contrib_config_file_result.changed
+
+- name: Enable and start otelcol-contrib service auto start
+  systemd:
+    name: otelcol-contrib
+    enabled: true
+    state: started
