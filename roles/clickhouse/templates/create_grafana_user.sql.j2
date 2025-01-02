@@ -1,2 +1,2 @@
-CREATE USER IF NOT EXISTS {{ grafana_clickhouse_user }} IDENTIFIED BY '{{ grafana_clickhouse_password }}';
-GRANT SELECT,SHOW ON *.* TO {{ grafana_clickhouse_user }};
+CREATE USER IF NOT EXISTS {{ grafana_clickhouse_user }} ON CLUSTER `{cluster}` IDENTIFIED BY '{{ grafana_clickhouse_password }}';
+GRANT ON CLUSTER `{cluster}` SELECT,SHOW ON *.* TO {{ grafana_clickhouse_user }};

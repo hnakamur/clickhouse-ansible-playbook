@@ -3,9 +3,9 @@
   roles:
   - role: rsync
   - role: clickhouse_apt_repo
-  - role: clickhouse
-    when: inventory_hostname in groups["databases"]
   - role: clickhouse_keeper
     when: inventory_hostname in groups["keepers"]
+  - role: clickhouse
+    when: inventory_hostname in groups["databases"]
   - role: grafana_oss
     when: inventory_hostname in groups["grafanas"]

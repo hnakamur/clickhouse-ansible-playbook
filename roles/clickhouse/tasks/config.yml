@@ -45,18 +45,20 @@
     state: restarted
   when: clickhouse_config_files.changed
 
-- name: Copy create_grafana_user.sql
-  template:
-    src: create_grafana_user.sql.j2
-    dest: /root/create_grafana_user.sql
+- block:
+  - name: Copy create_grafana_user.sql
+    template:
+      src: create_grafana_user.sql.j2
+      dest: /root/create_grafana_user.sql
 
-- name: Run create_grafana_user.sql
-  shell: clickhouse-client < /root/create_grafana_user.sql
+  - name: Run create_grafana_user.sql
+    shell: clickhouse-client < /root/create_grafana_user.sql
 
-- name: Copy create_otel_collector_db_and_user.sql
-  template:
-    src: create_otel_collector_db_and_user.sql.j2
-    dest: /root/create_otel_collector_db_and_user.sql
+  - name: Copy create_otel_collector_db_and_user.sql
+    template:
+      src: create_otel_collector_db_and_user.sql.j2
+      dest: /root/create_otel_collector_db_and_user.sql
 
-- name: Run create_otel_collector_db_and_user.sql
-  shell: clickhouse-client < /root/create_otel_collector_db_and_user.sql
+  - name: Run create_otel_collector_db_and_user.sql
+    shell: clickhouse-client < /root/create_otel_collector_db_and_user.sql
+  when: clickhouse_shard_id == '01' and clickhouse_replica_id == '01'
