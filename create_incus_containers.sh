@@ -1,12 +1,7 @@
 #!/bin/sh
 set -eu
 
-if [ $# -ne 1 ]; then
-  >&2 echo Usage: $0 project_name
-  exit 2
-fi
-
-project_name="$1"
+project_name="clickhouse"
 container_names="ch-c01-s01-r01 ch-c01-s01-r02 ch-c01-s02-r01 ch-c01-s02-r02 keeper01 keeper02 keeper03 grafana01 grafana02"
 
 project_ssh_dir=ssh
