@@ -26,15 +26,7 @@ create_container() {
 
   incus launch images:ubuntu/24.04/cloud "$container_name" -c user.user-data="#cloud-config
 timezone: Asia/Tokyo
-" -c user.network-config="#cloud-config
-network:
-  version: 2
-  ethernets:
-    eth0:
-      dhcp4: true
-      dhcp-identifier: mac
-      link-local: [ ipv4 ]"
-
+"
   incus exec "$container_name" -- apt update
   incus exec "$container_name" -- apt -y install openssh-server
   incus exec "$container_name" -- mkdir -p -m 700 /root/.ssh
