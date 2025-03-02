@@ -1,8 +1,8 @@
 [databases]
 ch-c01-s01-r01 ansible_connection=community.general.incus ansible_incus_project=clickhouse
 ch-c01-s01-r02 ansible_connection=community.general.incus ansible_incus_project=clickhouse
-; ch-c01-s02-r01 ansible_connection=community.general.incus ansible_incus_project=clickhouse
-; ch-c01-s02-r02 ansible_connection=community.general.incus ansible_incus_project=clickhouse
+ch-c01-s02-r01 ansible_connection=community.general.incus ansible_incus_project=clickhouse
+ch-c01-s02-r02 ansible_connection=community.general.incus ansible_incus_project=clickhouse
 
 [keepers]
 keeper01 ansible_connection=community.general.incus ansible_incus_project=clickhouse
