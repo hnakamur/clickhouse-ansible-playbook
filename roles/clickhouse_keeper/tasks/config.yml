@@ -27,4 +27,5 @@
 - name: Enable clickhouse-keeper auto start
   systemd:
     name: clickhouse-keeper
+    state: started
     enabled: true
