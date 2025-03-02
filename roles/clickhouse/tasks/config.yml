@@ -45,6 +45,12 @@
     state: restarted
   when: clickhouse_config_files.changed
 
+- name: Start and enable clickhouse-server service
+  systemd:
+    name: clickhouse-server
+    state: started
+    enabled: true
+
 - block:
   - name: Copy create_grafana_user.sql
     template:
