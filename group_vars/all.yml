@@ -1,7 +1,6 @@
 ---
 ansible_ssh_common_args: '-F ssh/config'
 ansible_python_interpreter: "{{ python_fullpath | default('/usr/bin/python3') }}"
-clickhouse_cluster_name: cluster01
 
 clickhouse_clusters:
 - 'cluster01'
